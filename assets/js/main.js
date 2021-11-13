@@ -1,7 +1,7 @@
 var currentDay = document.querySelector("#currentDay");
 
 var currentTime = moment();
-currentDay.textContent = currentTime.format("dddd, MMMM Do");
+currentDay.textContent = currentTime.format("dddd, MMMM Do, h:mm a");
 
 $("#task1").on("click", function() {
     
