@@ -1,130 +1,74 @@
-var currentDay = document.querySelector("#currentDay");
+// Display the Current Date with Moment.js
+var currentDate = moment().format('dddd, MMMM Do, h:mm a');
 
-var currentTime = moment();
-currentDay.textContent = currentTime.format("dddd, MMMM Do, h:mm a");
 
-$("#task1").on("click", function() {
-    
-    var textTask1 = $(this)
-    .text()
-    .trim();
+$("#currentDay").html(currentDate);
 
-    var textInputTask1 = $("<textarea>")
-    .addClass("textarea")
-    .val(textTask1);
-    $(this).replaceWith(textInputTask1);
-    textInputTask1.trigger("focus");
+$(document).ready(function () {
 
-  });
+    // Save Button and Variables
+    $(".saveBtn").on("click", function () {
 
-  $("#task2").on("click", function() {
-    
-    var textTask2 = $(this)
-    .text()
-    .trim();
+        var enteredInput = $(this).siblings(".description").val();
+        var time = $(this).parent().attr("id");
+        localStorage.setItem(time, enteredInput);
+    })
+   
+    function trackHours() {
 
-    var textInputTask2 = $("<textarea>")
-    .addClass("textarea")
-    .val(textTask2);
-    $(this).replaceWith(textInputTask2);
-    textInputTask2.trigger("focus");
+        // Obtain current Hour
+        var currentTime = moment().hour();
 
-  });
+        // Remove and Add Classes based on Hour
+        $(".time-block").each(function () {
+            var sectionHour = parseInt($(this).attr("id"));
 
-  $("#task3").on("click", function() {
-    
-    var textTask3 = $(this)
-    .text()
-    .trim();
+            if (sectionHour < currentTime) {
+                $(this).removeClass("future");
+                $(this).removeClass("present");
+                $(this).addClass("past");
+            }
+            else if (sectionHour === currentTime) {
+                $(this).removeClass("past");
+                $(this).removeClass("future");
+                $(this).addClass("present");
+            }
+            else {
+                $(this).removeClass("present");
+                $(this).removeClass("past");
+                $(this).addClass("future");
 
-    var textInputTask3 = $("<textarea>")
-    .addClass("textarea")
-    .val(textTask3);
-    $(this).replaceWith(textInputTask3);
-    textInputTask3.trigger("focus");
+            }
+        })
+    }
 
-  });
+    // Get Values from Local Storage by ID a
+    $("#9am .description")
+    .val(localStorage.getItem("9am"));
 
-  $("#task4").on("click", function() {
-    
-    var textTask4 = $(this)
-    .text()
-    .trim();
+    $("#10am .description")
+    .val(localStorage.getItem("10am"));
 
-    var textInputTask4 = $("<textarea>")
-    .addClass("textarea")
-    .val(textTask4);
-    $(this).replaceWith(textInputTask4);
-    textInputTask4.trigger("focus");
+    $("#11am .description")
+    .val(localStorage.getItem("11am"));
 
-  });
+    $("#12pm .description")
+    .val(localStorage.getItem("12pm"));
 
-  $("#task5").on("click", function() {
-    
-    var textTask5 = $(this)
-    .text()
-    .trim();
+    $("#1pm .description")
+    .val(localStorage.getItem("1pm"));
 
-    var textInputTask5 = $("<textarea>")
-    .addClass("textarea")
-    .val(textTask5);
-    $(this).replaceWith(textInputTask5);
-    textInputTask5.trigger("focus");
+    $("#2pm .description")
+    .val(localStorage.getItem("2pm"));
 
-  });
+    $("#3pm .description")
+    .val(localStorage.getItem("3pm"));
 
-  $("#task6").on("click", function() {
-    
-    var textTask6 = $(this)
-    .text()
-    .trim();
+    $("#4pm .description")
+    .val(localStorage.getItem("4pm"));
 
-    var textInputTask6 = $("<textarea>")
-    .addClass("textarea")
-    .val(textTask6);
-    $(this).replaceWith(textInputTask6);
-    textInputTask6.trigger("focus");
+    $("#5pm .description")
+    .val(localStorage.getItem("5pm"));
 
-  });
-
-  $("#task7").on("click", function() {
-    
-    var textTask7 = $(this)
-    .text()
-    .trim();
-
-    var textInputTask7 = $("<textarea>")
-    .addClass("textarea")
-    .val(textTask7);
-    $(this).replaceWith(textInputTask7);
-    textInputTask7.trigger("focus");
-
-  });
-
-  $("#task8").on("click", function() {
-    
-    var textTask8 = $(this)
-    .text()
-    .trim();
-
-    var textInputTask8 = $("<textarea>")
-    .addClass("textarea")
-    .val(textTask8);
-    $(this).replaceWith(textInputTask8);
-    textInputTask8.trigger("focus");
-
-  });
-
-  $("#task9").on("click", function() {
-    
-    var textTask9 = $(this)
-    .text()
-    .trim();
-
-    var textInputTask9 = $("<textarea>")
-    .addClass("textarea")
-    .val(textTask9);
-    $(this).replaceWith(textInputTask9);
-    textInputTask9.trigger("focus");
-
-  });
+    trackHours();
+})
