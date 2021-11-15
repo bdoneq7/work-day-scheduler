@@ -4,35 +4,38 @@ var currentDate = moment().format('dddd, MMMM Do, h:mm a');
 
 $("#currentDay").html(currentDate);
 
+
 $(document).ready(function () {
 
-    // Save Button and Variables
+    // Button and Variable Function
     $(".saveBtn").on("click", function () {
-
         var enteredInput = $(this).siblings(".description").val();
-        var time = $(this).parent().attr("id");
-        localStorage.setItem(time, enteredInput);
+        var hour = $(this).parent().attr("id");
+        localStorage.setItem(hour, enteredInput);
     })
    
+    // Track Hours Function
     function trackHours() {
 
-        // Obtain current Hour
         var currentTime = moment().hour();
 
-        // Remove and Add Classes based on Hour
+        // Remove and Add Time Block Classes based on Hour
         $(".time-block").each(function () {
             var sectionHour = parseInt($(this).attr("id"));
 
+            // If less than Current Time, Add Past Class
             if (sectionHour < currentTime) {
                 $(this).removeClass("future");
                 $(this).removeClass("present");
                 $(this).addClass("past");
             }
+            // If equal to Current Time, Add Present Class
             else if (sectionHour === currentTime) {
                 $(this).removeClass("past");
                 $(this).removeClass("future");
                 $(this).addClass("present");
             }
+            // If Greater, add Future Class
             else {
                 $(this).removeClass("present");
                 $(this).removeClass("past");
@@ -42,7 +45,7 @@ $(document).ready(function () {
         })
     }
 
-    // Get Values from Local Storage by ID a
+    // Retrieve Values from Local Storage by ID 
     $("#9am .description")
     .val(localStorage.getItem("9am"));
 
