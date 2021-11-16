@@ -25,20 +25,17 @@ $(document).ready(function () {
 
             // If less than Current Time, Add Past Class
             if (sectionHour < currentTime) {
-                $(this).removeClass("future");
-                $(this).removeClass("present");
+                $(this).removeClass("future", "present");
                 $(this).addClass("past");
             }
             // If equal to Current Time, Add Present Class
             else if (sectionHour === currentTime) {
-                $(this).removeClass("past");
-                $(this).removeClass("future");
+                $(this).removeClass("past", "future");
                 $(this).addClass("present");
             }
             // If Greater, add Future Class
             else {
-                $(this).removeClass("present");
-                $(this).removeClass("past");
+                $(this).removeClass("present", "past");
                 $(this).addClass("future");
 
             }
